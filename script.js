@@ -24,11 +24,28 @@ function updatePlayIcon() {
 }
 
 //update progress & timestamp
-function updateProgress() {}
+function updateProgress() {
+  progress.value = (video.currentTime / video.duration) * 100;
+
+  let mins = Math.floor(video.currentTime / 60);
+  if(mins < 10) {
+    mins = '0' + String(mins);
+  }
+
+  let secs = Math.floor(video.currentTime % 60);
+  if(secs < 10) {
+    secs = '0' + String(secs);
+  }
+
+  timestamp.innerHTML = `${mins}:${secs}`;
+
+}
 
 // set video time to progress
 
-function setVideoProgress() {}
+function setVideoProgress() {
+  video.currentTime = (+progress.value * video.duration) / 100;
+}
 // stop video
 function stopVideo() {
   video.currentTime = 0;
